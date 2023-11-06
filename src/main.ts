@@ -67,8 +67,9 @@ const todo = (() => {
     /**
      * Searches for a todo by name.
      * @param name Name of todo.
+     * @returns All todos that match the name.
      */
-    searchTodoByName(name: string): Todo | undefined {
+    searchTodoByName(name: string): Todo[] {
       throw new Error("searchTodoByName is not implemented.");
     },
 
