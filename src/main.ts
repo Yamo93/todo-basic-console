@@ -62,7 +62,7 @@ const todo = (() => {
     },
 
     listTodos() {
-      if (!todos.length) {
+      if (todos.length === 0) {
         console.log("List is empty.");
         return;
       }
