@@ -14,7 +14,7 @@ const todo = (() => {
      * @param description Description of the todo
      */
     addTodo(name: string, description: string): void {
-      todos.push({ id: 1, name, description });
+      throw new Error("addTodo is not implemented.");
     },
 
     /**
