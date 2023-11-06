@@ -1,3 +1,5 @@
+import { type Todo } from "./main";
+
 export {};
 declare global {
   interface Window {
@@ -13,6 +15,7 @@ declare global {
       sortTodosByCreationDate: () => Todo[];
       saveTodosToLocalStorage: () => void;
       readTodosFromLocalStorage: () => void;
+      getTodos: () => Todo[];
       listTodos: () => void;
     };
   }

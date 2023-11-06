@@ -1,10 +1,10 @@
-type Todo = {
+export type Todo = {
   id: number;
   name: string;
   description: string;
 };
 
-const todo = (() => {
+export const todo = (() => {
   const todos: Todo[] = [];
 
   return {
@@ -99,6 +99,16 @@ const todo = (() => {
      */
     readTodosFromLocalStorage(): void {
       throw new Error("readTodosFromLocalStorage is not implemented.");
+    },
+
+    /**
+     * Get a copy of todos for the purpose of testing.
+     * @returns A copy of todos.
+     */
+    getTodos(): Todo[] {
+      return todos.map((todo) => ({
+        ...todo,
+      }));
     },
 
     /**
