@@ -8,7 +8,7 @@ declare global {
       updateDescription: (id: number, description: string) => void;
       markAsCompleted: (id: number, completed: boolean) => void;
       moveTodo: (id: number, newIndex: number) => void;
-      searchTodoByName: (name: string) => Todo | undefined;
+      searchTodosByName: (name: string) => Todo[];
       sortTodosByName: () => Todo[];
       sortTodosByCreationDate: () => Todo[];
       saveTodosToLocalStorage: () => void;

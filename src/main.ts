@@ -69,7 +69,7 @@ const todo = (() => {
      * @param name Name of todo.
      * @returns All todos that match the name.
      */
-    searchTodoByName(name: string): Todo[] {
+    searchTodosByName(name: string): Todo[] {
       throw new Error("searchTodoByName is not implemented.");
     },
 
@@ -121,4 +121,5 @@ const todo = (() => {
 console.log(`Welcome to the Todo console application.
 Type "todo" in the Console to see the available functions.`);
 console.log(todo);
+// expose todo object on Window
 window.todo = todo;
