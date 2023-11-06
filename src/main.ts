@@ -1,8 +1,4 @@
-export type Todo = {
-  id: number;
-  name: string;
-  description: string;
-};
+import { type Todo } from ".";
 
 export const todo = (() => {
   const todos: Todo[] = [];

@@ -1,6 +1,9 @@
-import { type Todo } from "./main";
+export type Todo = {
+  id: number;
+  name: string;
+  description: string;
+};
 
-export {};
 declare global {
   interface Window {
     todo: {

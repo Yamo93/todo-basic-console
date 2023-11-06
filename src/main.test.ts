@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { todo } from "./main";
+import { todo } from "./main.js";
 
 test("should add a todo", () => {
   // act
