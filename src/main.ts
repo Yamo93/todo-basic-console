@@ -67,6 +67,7 @@ const todo = (() => {
         return;
       }
 
+      // loop through todos
       for (const todo of todos) {
         console.log(todo);
       }
