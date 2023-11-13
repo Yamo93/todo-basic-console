@@ -3,6 +3,8 @@ import { type Todo } from ".";
 export const todo = (() => {
   const todos: Todo[] = [];
 
+  let newId = 1;
+
   return {
     /**
      * Adds a todo with a unique id.
@@ -10,7 +12,15 @@ export const todo = (() => {
      * @param description Description of the todo
      */
     addTodo(name: string, description: string): void {
-      throw new Error("addTodo is not implemented.");
+      const myTodo = {
+        id: newId,
+        name: name,
+        description: description,
+        completed: false,
+      };
+      todos.push(myTodo);
+      console.log(`Todo added: ${name} ${description}`);
+      newId++;
     },
 
     /**
@@ -18,7 +28,14 @@ export const todo = (() => {
      * @param id Id of todo to delete
      */
     removeTodo(id: number): void {
-      throw new Error("removeTodo is not implemented.");
+      if (id == null) {
+        throw new Error("Id is missing");
+      } else {
+        const index = todos.findIndex((todo) => todo.id === id);
+        if (index !== -1) {
+          todos.splice(index, 1);
+        }
+      }
     },
 
     /**
@@ -28,7 +45,15 @@ export const todo = (() => {
      * @param name New name.
      */
     updateName(id: number, name: string): void {
-      throw new Error("updateName is not implemented.");
+      if (id == null) throw new Error("id is missing");
+      else if (name == null) {
+        throw new Error("name is missing");
+      } else {
+        const index = todos.findIndex((todo) => todo.id === id);
+        if (index !== -1) {
+          todos[index].name = name;
+        }
+      }
     },
 
     /**
@@ -38,7 +63,15 @@ export const todo = (() => {
      * @param description New description.
      */
     updateDescription(id: number, description: string): void {
-      throw new Error("updateDescription is not implemented.");
+      if (id == null) throw new Error("id is missing");
+      else if (description == null) {
+        throw new Error("description is missing");
+      } else {
+        const index = todos.findIndex((todo) => todo.id === id);
+        if (index !== -1) {
+          todos[index].description = description;
+        }
+      }
     },
 
     /**
@@ -47,7 +80,11 @@ export const todo = (() => {
      * @param completed Todo is completed.
      */
     markAsCompleted(id: number, completed: boolean): void {
-      throw new Error("markAsCompleted is not implemented.");
+      if (id == null) throw new Error("id is missing");
+      const index = todos.findIndex((todo) => todo.id === id);
+      if (index !== -1) {
+        todos[index].completed = completed;
+      }
     },
 
     /**
@@ -57,7 +94,15 @@ export const todo = (() => {
      * @param newIndex New index.
      */
     moveTodo(id: number, newIndex: number): void {
-      throw new Error("moveTodo is not implemented.");
+      if (id == null) throw new Error("id is missing");
+      else if (newIndex < 0 || newIndex > todos.length) {
+        throw new Error("newindex is invalid");
+      }
+      const index = todos.findIndex((todo) => todo.id === id);
+      if (index !== -1) {
+        const remove = todos.splice(index, 1)[0];
+        todos.splice(newIndex, 0, remove);
+      }
     },
 
     /**
