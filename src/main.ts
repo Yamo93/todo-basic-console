@@ -1,6 +1,6 @@
 import { type Todo } from ".";
 
-export const todo = (() => {
+export const createTodoInstance = () => {
   const todos: Todo[] = [];
 
   let newId = 1;
@@ -173,10 +173,11 @@ export const todo = (() => {
       }
     },
   };
-})();
+};
 
 console.log(`Welcome to the Todo console application.
 Type "todo" in the Console to see the available functions.`);
+const todo = createTodoInstance();
 console.log(todo);
 // expose todo object on Window
 window.todo = todo;
