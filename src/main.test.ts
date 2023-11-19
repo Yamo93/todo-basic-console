@@ -81,7 +81,7 @@ test("should search todos by name in beginning of string", () => {
   todo.addTodo("banana", "A description");
   todo.addTodo("ana", "A description");
   todo.addTodo("anab", "A description");
-  const result = todo.searchTodosByName("ban");
+  const result = todo.searchTodosByName("BAN");
   expect(result).toHaveLength(1);
 });
 
@@ -90,7 +90,7 @@ test("should search todos by name in middle of string", () => {
   todo.addTodo("hello", "A description");
   todo.addTodo("hello there world", "A description");
   todo.addTodo("hello world", "A description");
-  const result = todo.searchTodosByName("there");
+  const result = todo.searchTodosByName("THERE");
   expect(result).toHaveLength(1);
   expect(result[0].name).toBe("hello there world");
 });
@@ -100,7 +100,7 @@ test("should search todos by name in end of string", () => {
   todo.addTodo("hello", "A description");
   todo.addTodo("hello there world", "A description");
   todo.addTodo("hello world", "A description");
-  const result = todo.searchTodosByName("world");
+  const result = todo.searchTodosByName("WORLD");
   expect(result).toHaveLength(2);
   expect(result[0].name).toBe("hello there world");
   expect(result[1].name).toBe("hello world");
