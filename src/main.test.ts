@@ -141,4 +141,5 @@ test("should save todos to local storage", () => {
   todo.saveTodosToLocalStorage();
   const todos = localStorage.getItem("todos");
   expect(todos).not.toBeNull();
+  localStorage.removeItem("todos");
 });
