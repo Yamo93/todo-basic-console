@@ -149,7 +149,8 @@ export const createTodoInstance = (): TodoInstance => {
         readTodosFromLocalStorage(): void {
             const local = localStorage.getItem('todos');
             if (local) {
-                JSON.parse(local);
+                todos.splice(0,todos.length)
+                todos.push(...JSON.parse(local))
             }
         },
 
