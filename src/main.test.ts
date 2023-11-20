@@ -117,3 +117,18 @@ test("should sort todos alphabetically in ascending order", () => {
   expect(result[1].name).toBe("b");
   expect(result[2].name).toBe("c");
 });
+
+test("should load todos if local storage has data", () => {
+  localStorage.setItem("todos", JSON.stringify([
+    { id: 1, name: "hello world", description: "hej", completed: false, creationDate: new Date() },
+    { id: 2, name: "hello world", description: "hej", completed: false, creationDate: new Date() },
+  ]));
+
+  const todo = createTodoInstance();
+  todo.readTodosFromLocalStorage();
+  expect(todo.getTodos()).toHaveLength(2);
+  expect(todo.getTodos()[0].id).toBe(1);
+  expect(todo.getTodos()[1].id).toBe(2);
+
+  localStorage.removeItem("todos");
+});
