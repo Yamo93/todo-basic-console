@@ -103,9 +103,10 @@ export const createTodoInstance = () => {
             const index = todos.findIndex((todo) => todo.id === id);
             if (index === newIndex) {
                 throw new Error('index is the same');
+            }
                 const remove = todos.splice(index, 1)[0];
                 todos.splice(newIndex, 0, remove);
-            }
+            
         },
 
         /**
