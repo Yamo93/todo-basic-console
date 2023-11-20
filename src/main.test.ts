@@ -132,3 +132,13 @@ test("should load todos if local storage has data", () => {
 
   localStorage.removeItem("todos");
 });
+
+test("should save todos to local storage", () => {
+  const todo = createTodoInstance();
+  todo.addTodo("c", "A description");
+  todo.addTodo("b", "A description");
+  todo.addTodo("a", "A description");
+  todo.saveTodosToLocalStorage();
+  const todos = localStorage.getItem("todos");
+  expect(todos).not.toBeNull();
+});
