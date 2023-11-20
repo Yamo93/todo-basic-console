@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { createTodoInstance } from "./main.js";
+import { createTodoInstance } from "./main.ts";
 
 test("should add a todo", () => {
   const todo = createTodoInstance();
