@@ -1,6 +1,6 @@
-import { Todo } from ".";
+import { Todo, TodoInstance } from ".";
 
-export const createTodoInstance = () => {
+export const createTodoInstance = (): TodoInstance => {
     const todos: Todo[] = [];
 
     let newId = 1;
