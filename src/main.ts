@@ -8,7 +8,8 @@ console.log(todo);
 // expose todo object on Window
 window.todo = todo;
 
+todo.readTodosFromLocalStorage();
+
 // pass todo to ui
 draw(todo);
 
-todo.readTodosFromLocalStorage();
