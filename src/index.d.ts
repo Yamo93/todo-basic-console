@@ -7,6 +7,7 @@ export type Todo = {
 };
 
 export type TodoInstance = {
+  [x: string]: any;
   addTodo: (name: string, description: string) => void;
   removeTodo: (id: number) => void;
   updateName: (id: number, name: string) => void;
