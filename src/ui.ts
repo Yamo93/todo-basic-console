@@ -25,39 +25,50 @@ export function draw(todo: TodoInstance) {
         const description = '';
         todo.addTodo(name, description);
         input.value = '';
-        updateTodoList()
+        updateTodoList();
     });
 
-    function updateTodoList(){
-        const todos = todo.getTodos()
-        list.innerHTML=''
-
-       todos.forEach(todoItem => {
-        const li = document.createElement('li')
-        li.textContent = `${todoItem.name}: ${todoItem.description}`
-        list.appendChild(li)
-
-        const deleteButton = document.createElement('button')
-        deleteButton.textContent = 'Delete'
-        li.appendChild(deleteButton)
-        deleteButton.addEventListener('click',()=>{
-            todo.removeTodo(todoItem.id)
-            updateTodoList()
-        })
-        li.appendChild(deleteButton);
-
-        const updateButton = document.createElement('button')
-        updateButton.textContent = 'update'
-        li.appendChild(updateButton)
-        updateButton.addEventListener('click',()=>{
-            const newDescription =prompt('Enter new description',todoItem.description)
-            if (newDescription !== null && newDescription !== todoItem.description) {
-                todo.updateDescription(todoItem.id, newDescription);
+    function updateTodoList() {
+        const todos = todo.getTodos();
+        list.innerHTML = '';
+    
+        todos.forEach((todoItem) => {
+            const li = document.createElement('li');
+            li.textContent = `${todoItem.name}: ${todoItem.description}`;
+    
+            const nameUpdateButton = document.createElement('button');
+            nameUpdateButton.textContent = 'Update Name';
+            nameUpdateButton.addEventListener('click', () => {
+                const updateName = prompt('Update your todo', todoItem.name);
+                if (updateName !== null && updateName !== '') {
+                    todo.updateName(todoItem.id, updateName);
+                    updateTodoList();
+                } else if (updateName === '') {
+                    alert('You must enter a value');
+                }
+            });
+            li.appendChild(nameUpdateButton);
+    
+            const descUpdateButton = document.createElement('button');
+            descUpdateButton.textContent = 'Update Description';
+            descUpdateButton.addEventListener('click', () => {
+                const newDescription = prompt('Enter new description', todoItem.description);
+                if (newDescription !== null && newDescription !== todoItem.description) {
+                    todo.updateDescription(todoItem.id, newDescription);
+                    updateTodoList();
+                }
+            });
+            li.appendChild(descUpdateButton);
+    
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+                todo.removeTodo(todoItem.id);
                 updateTodoList();
-            }
-        })
-        li.appendChild(updateButton);
-        
-       });
+            });
+            li.appendChild(deleteButton);
+    
+            list.appendChild(li);
+        });
     }
 }
