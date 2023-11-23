@@ -31,11 +31,24 @@ export function draw(todo: TodoInstance) {
     function updateTodoList() {
         const todos = todo.getTodos();
         list.innerHTML = '';
-    
+
         todos.forEach((todoItem) => {
             const li = document.createElement('li');
             li.textContent = `${todoItem.name}: ${todoItem.description}`;
-    
+
+            if (todoItem.completed) {
+                li.style.textDecoration = 'line-through';
+            } else {
+                li.style.textDecoration = 'none';
+            }
+
+            li.addEventListener('click', () => {
+                todo.markAsCompleted(todoItem.id, !todoItem.completed);
+                updateTodoList();
+            });
+
+            list.appendChild(li);
+
             const nameUpdateButton = document.createElement('button');
             nameUpdateButton.textContent = 'Update Name';
             nameUpdateButton.addEventListener('click', () => {
@@ -48,7 +61,7 @@ export function draw(todo: TodoInstance) {
                 }
             });
             li.appendChild(nameUpdateButton);
-    
+
             const descUpdateButton = document.createElement('button');
             descUpdateButton.textContent = 'Update Description';
             descUpdateButton.addEventListener('click', () => {
@@ -59,7 +72,7 @@ export function draw(todo: TodoInstance) {
                 }
             });
             li.appendChild(descUpdateButton);
-    
+
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', () => {
@@ -67,7 +80,7 @@ export function draw(todo: TodoInstance) {
                 updateTodoList();
             });
             li.appendChild(deleteButton);
-    
+
             list.appendChild(li);
         });
     }
