@@ -9,7 +9,7 @@ export function draw(todo: TodoInstance) {
     app.appendChild(header);
 
     const input = document.createElement('input');
-    input.setAttribute('type', 'input');
+    input.setAttribute('type', 'text');
     app.append(input);
 
     const button = document.createElement('button');
@@ -20,6 +20,24 @@ export function draw(todo: TodoInstance) {
     const list = document.createElement('ul');
     app.append(list);
 
+    const inputSearch = document.createElement("input");
+    inputSearch.setAttribute('type','text')
+    inputSearch.setAttribute('placeholder', 'search for todoname');
+    inputSearch.classList.add('search');   
+    app.append(inputSearch)
+
+    const searchButton = document.createElement('button')
+    searchButton.setAttribute('type','button')
+    searchButton.textContent ='search'
+    app.append(searchButton)
+    
+    searchButton.addEventListener('click', () => {
+        const searchTerm = inputSearch.value;
+        const searchResults = todo.searchTodosByName(searchTerm);
+        console.log(searchResults); 
+        updateTodoList();
+    });
+    
     button.addEventListener('click', () => {
         const name = input.value;
         const description = '';
@@ -31,8 +49,9 @@ export function draw(todo: TodoInstance) {
     function updateTodoList() {
         const todos = todo.getTodos();
         list.innerHTML = '';
+        const sortedTodos = todo.sortTodosByName();
 
-        todos.forEach((todoItem) => {
+        sortedTodos.forEach((todoItem) => {
             const li = document.createElement('li');
             li.textContent = `${todoItem.name}: ${todoItem.description}`;
 
@@ -51,8 +70,9 @@ export function draw(todo: TodoInstance) {
 
             const nameUpdateButton = document.createElement('button');
             nameUpdateButton.textContent = 'Update Name';
-            nameUpdateButton.addEventListener('click', () => {
+            nameUpdateButton.addEventListener('click', (event) => {
                 const updateName = prompt('Update your todo', todoItem.name);
+                event.stopPropagation();
                 if (updateName !== null && updateName !== '') {
                     todo.updateName(todoItem.id, updateName);
                     updateTodoList();
@@ -64,7 +84,8 @@ export function draw(todo: TodoInstance) {
 
             const descUpdateButton = document.createElement('button');
             descUpdateButton.textContent = 'Update Description';
-            descUpdateButton.addEventListener('click', () => {
+            descUpdateButton.addEventListener('click', (event) => {
+                event.stopPropagation();
                 const newDescription = prompt('Enter new description', todoItem.description);
                 if (newDescription !== null && newDescription !== todoItem.description) {
                     todo.updateDescription(todoItem.id, newDescription);
@@ -82,6 +103,30 @@ export function draw(todo: TodoInstance) {
             li.appendChild(deleteButton);
 
             list.appendChild(li);
+
+            const moveup = document.createElement('button');
+            moveup.textContent = 'Move Up';
+            moveup.addEventListener('click', (event) => {
+                event.stopPropagation();
+
+                const currentIndex = todos.findIndex((t) => t.id === todoItem.id);
+                const newIndex = Math.max(currentIndex - 1, 0);
+                todo.moveTodo(todoItem.id, newIndex);
+                updateTodoList();
+            });
+            li.appendChild(moveup);
+
+            const movedown = document.createElement('button');
+            movedown.textContent = 'Move Down';
+            movedown.addEventListener('click', (event) => {
+                event.stopPropagation(); 
+
+                const currentIndex = todos.findIndex((t) => t.id === todoItem.id);
+                const newIndex = Math.min(currentIndex + 1, todos.length - 1);
+                todo.moveTodo(todoItem.id, newIndex);
+                updateTodoList();
+            });
+            li.appendChild(movedown);
         });
     }
 }
